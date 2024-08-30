@@ -1,0 +1,65 @@
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  max-width: 16rem;
+  word-wrap: break-word;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-trigger {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-trigger:hover .tooltip,
+.tooltip-trigger:focus .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .tooltip {
+    position: fixed;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    max-width: 90%;
+  }
+}
+
+#modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  #modal-content {
+    width: 90%;
+    max-width: none;
+  }
+}
+
+.result-value {
+  font-size: 1.25rem; /* větší písmo */
+  font-weight: 600; /* semibold */
+  color: #2c3e50; /* tmavší barva pro lepší čitelnost */
+}
+
+.result-comparison {
+  font-size: 1.125rem; /* o něco menší než hodnota, ale stále větší než běžný text */
+  font-weight: 500; /* medium */
+  color: #2c3e50;
+}
