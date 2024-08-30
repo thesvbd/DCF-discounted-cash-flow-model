@@ -42,6 +42,16 @@
                 
                 <form id="dcf-form" class="space-y-4">
                     <div>
+                        <label for="currency" class="block text-sm font-medium text-gray-700">Měna</label>
+                        <select id="currency" name="currency" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option value="Kč">Česká koruna (Kč)</option>
+                            <option value="€">Euro (€)</option>
+                            <option value="$">Americký dolar ($)</option>
+                            <option value="£">Britská libra (£)</option>
+                        </select>
+                    </div>
+
+                    <div>
                         <label for="forecast-years" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Počet let, pro které předpovídáte budoucí peněžní toky. Obvykle se používá 5-10 let. Tuto hodnotu si určujete sami na základě vašeho odhadu budoucího vývoje společnosti.">
                             Počet let prognózy (Forecast Period)
                             <span class="ml-1 modal-trigger cursor-pointer">
@@ -81,7 +91,7 @@
                     
                     <div>
                         <label for="current-stock-price" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Aktuální cena akcie, která se používá k porovnání s vypočítanou vnitřní hodnotou. Tato cena je získána z trhu a představuje současnou tržní cenu akcie.">
-                            Aktuální cena akcie (Current Stock Price) (Kč)
+                            Aktuální cena akcie (Current Stock Price) (<span class="currency-span">Kč</span>)
                             <span class="ml-1 modal-trigger cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
