@@ -1,5 +1,3 @@
----
-
 > ⚠️ **Disclaimer:** This is an experimental project and may contain errors. Do not make any investment decisions based on this tool.
 
 ---
