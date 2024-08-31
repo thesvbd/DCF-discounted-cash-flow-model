@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCF Kalkulačka</title>
+    <title>DCF Calculator</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -11,26 +11,26 @@
     <div class="max-w-4xl mx-auto">
         <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
             <div class="p-8">
-                <h1 class="text-3xl font-bold mb-4">DCF Kalkulačka</h1>
+                <h1 class="text-3xl font-bold mb-4">DCF Calculator</h1>
                 
                 <div class="text-sm text-gray-600">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Co je DCF model?</h2>
-                    <p class="mb-4">DCF (Discounted Cash Flow) je metoda oceňování, která se používá k určení současné hodnoty investice na základě očekávaných budoucích peněžních toků.</p>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">What is the DCF model?</h2>
+                    <p class="mb-4">DCF (Discounted Cash Flow) is a valuation method used to determine the present value of an investment based on expected future cash flows.</p>
                     
-                    <h3 class="text-lg font-semibold mt-4 mb-2">K čemu slouží?</h3>
-                    <p class="mb-4">DCF model pomáhá investorům určit, zda je akcie podhodnocená nebo nadhodnocená porovnáním vypočítané vnitřní hodnoty s aktuální tržní cenou.</p>
+                    <h3 class="text-lg font-semibold mt-4 mb-2">What is it used for?</h3>
+                    <p class="mb-4">The DCF model helps investors determine whether a stock is undervalued or overvalued by comparing the calculated intrinsic value with the current market price.</p>
                     
-                    <h3 class="text-lg font-semibold mt-4 mb-2">Základní vzorec:</h3>
-                    <p class="mb-4">Vnitřní hodnota = Součet diskontovaných budoucích peněžních toků + Diskontovaná terminální hodnota</p>
+                    <h3 class="text-lg font-semibold mt-4 mb-2">Basic formula:</h3>
+                    <p class="mb-4">Intrinsic Value = Sum of Discounted Future Cash Flows + Discounted Terminal Value</p>
                     
-                    <h3 class="text-lg font-semibold mt-4 mb-2">Jak používat kalkulačku:</h3>
+                    <h3 class="text-lg font-semibold mt-4 mb-2">How to use the calculator:</h3>
                     <ol class="list-decimal list-inside mb-4">
-                        <li>Zadejte počet let prognózy (Forecast Period) (obvykle 5-10 let)</li>
-                        <li>Vyplňte očekávané peněžní toky (Cash Flows) pro každý rok (v milionech Kč)</li>
-                        <li>Zadejte diskontní sazbu (Discount Rate) (např. 10% pro akcie)</li>
-                        <li>Určete míru růstu pro terminální hodnotu (Terminal Growth Rate) (obvykle 2-3%)</li>
-                        <li>Vložte aktuální cenu akcie (Current Stock Price) (Kč) a počet vydaných akcií (Shares Outstanding) (v milionech)</li>
-                        <li>Klikněte na "Vypočítat DCF" pro zobrazení výsledků</li>
+                        <li>Enter the number of forecast years (Forecast Period) (usually 5-10 years)</li>
+                        <li>Fill in the expected cash flows for each year (in millions of the selected currency)</li>
+                        <li>Enter the discount rate (e.g., 10% for stocks)</li>
+                        <li>Determine the growth rate for the terminal value (usually 2-3%)</li>
+                        <li>Enter the current stock price and the number of outstanding shares (in millions)</li>
+                        <li>Click on "Calculate DCF" to view the results</li>
                     </ol>
                 </div>
             </div>
@@ -38,85 +38,85 @@
 
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <div class="p-8">
-                <h2 class="text-2xl font-bold mb-4">Výpočet DCF</h2>
+                <h2 class="text-2xl font-bold mb-4">DCF Calculation</h2>
                 
                 <form id="dcf-form" class="space-y-4">
                     <div>
-                        <label for="currency" class="block text-sm font-medium text-gray-700">Měna</label>
+                        <label for="currency" class="block text-sm font-medium text-gray-700">Currency</label>
                         <select id="currency" name="currency" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <option value="Kč">Česká koruna (Kč)</option>
+                            <option value="$">US Dollar ($)</option>
                             <option value="€">Euro (€)</option>
-                            <option value="$">Americký dolar ($)</option>
-                            <option value="£">Britská libra (£)</option>
+                            <option value="£">British Pound (£)</option>
+                            <option value="CZK">Czech Koruna (CZK)</option>
                         </select>
                     </div>
 
                     <div>
-                        <label for="forecast-years" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Počet let, pro které předpovídáte budoucí peněžní toky. Obvykle se používá 5-10 let. Tuto hodnotu si určujete sami na základě vašeho odhadu budoucího vývoje společnosti.">
-                            Počet let prognózy (Forecast Period)
+                        <label for="forecast-years" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="The number of years for which you forecast future cash flows. Typically 5-10 years are used. You determine this value based on your estimate of the company's future development.">
+                            Forecast Period (years)
                             <span class="ml-1 modal-trigger cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                                 </svg>
                             </span>
                         </label>
-                        <input type="number" id="forecast-years" name="forecast-years" placeholder="např. 5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                        <input type="number" id="forecast-years" name="forecast-years" placeholder="e.g., 5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                     </div>
                     
                     <div id="cash-flows-inputs" class="space-y-2"></div>
                     
                     <div>
-                        <label for="discount-rate" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Diskontní sazba, která se používá k diskontování budoucích peněžních toků. Tato sazba zohledňuje riziko, že budoucí peněžní toky nebudou přijaty v plánovaném čase nebo vůbec. Obvykle se používá diskontní sazba, která odpovídá riziku dané typu investice.">
-                            Diskontní sazba (Discount Rate) (%)
+                        <label for="discount-rate" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="The discount rate used to discount future cash flows. This rate takes into account the risk that future cash flows will not be received as planned or at all. Typically, a discount rate is used that corresponds to the risk of the given type of investment.">
+                            Discount Rate (%)
                             <span class="ml-1 modal-trigger cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                                 </svg>
                             </span>
                         </label>
-                        <input type="number" id="discount-rate" name="discount-rate" step="0.01" placeholder="např. 10" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                        <input type="number" id="discount-rate" name="discount-rate" step="0.01" placeholder="e.g., 10" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                     </div>
                     
                     <div>
-                        <label for="terminal-growth-rate" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Míra růstu, která se používá k odhadu budoucího růstu peněžních toků po dobu delší než prognóza. Tato míra růstu se používá k odhadu terminální hodnoty, která představuje hodnotu společnosti po dobu delší než prognóza.">
-                            Míra růstu pro terminální hodnotu (Terminal Growth Rate) (%)
+                        <label for="terminal-growth-rate" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="The growth rate used to estimate future cash flow growth for a period longer than the forecast. This growth rate is used to estimate the terminal value, which represents the value of the company for a period longer than the forecast.">
+                            Terminal Growth Rate (%)
                             <span class="ml-1 modal-trigger cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                                 </svg>
                             </span>
                         </label>
-                        <input type="number" id="terminal-growth-rate" name="terminal-growth-rate" step="0.01" placeholder="např. 2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                        <input type="number" id="terminal-growth-rate" name="terminal-growth-rate" step="0.01" placeholder="e.g., 2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                     </div>
                     
                     <div>
-                        <label for="current-stock-price" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Aktuální cena akcie, která se používá k porovnání s vypočítanou vnitřní hodnotou. Tato cena je získána z trhu a představuje současnou tržní cenu akcie.">
-                            Aktuální cena akcie (Current Stock Price) (<span class="currency-span">Kč</span>)
+                        <label for="current-stock-price" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="The current stock price used to compare with the calculated intrinsic value. This price is obtained from the market and represents the current market price of the stock.">
+                            Current Stock Price (<span class="currency-span">CZK</span>)
                             <span class="ml-1 modal-trigger cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                                 </svg>
                             </span>
                         </label>
-                        <input type="number" id="current-stock-price" name="current-stock-price" step="0.01" placeholder="např. 250" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                        <input type="number" id="current-stock-price" name="current-stock-price" step="0.01" placeholder="e.g., 250" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                     </div>
                     
                     <div>
-                        <label for="shares-outstanding" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Počet vydaných akcií, který se používá k určení tržní kapitalizace společnosti. Tato hodnota je získána z výkazu finančních výsledků společnosti.">
-                            Počet vydaných akcií (Shares Outstanding) (v milionech)
+                        <label for="shares-outstanding" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="The number of outstanding shares used to determine the company's market capitalization. This value is obtained from the company's financial statements.">
+                            Shares Outstanding (in millions)
                             <span class="ml-1 modal-trigger cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                                 </svg>
                             </span>
                         </label>
-                        <input type="number" id="shares-outstanding" name="shares-outstanding" step="0.01" placeholder="např. 10" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                        <input type="number" id="shares-outstanding" name="shares-outstanding" step="0.01" placeholder="e.g., 10" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                     </div>
                     
-                    <button type="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Vypočítat DCF</button>
+                    <button type="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Calculate DCF</button>
                 </form>
                 <div id="result" class="mt-6 hidden">
-                    <h2 class="text-lg font-semibold text-gray-900">Výsledky:</h2>
+                    <h2 class="text-lg font-semibold text-gray-900">Results:</h2>
                     <p id="intrinsic-value" class="mt-2 text-sm text-gray-600"></p>
                     <p id="comparison" class="mt-2 text-sm text-gray-600"></p>
                 </div>
@@ -129,7 +129,7 @@
             <h3 id="modal-title" class="text-lg font-semibold mb-2"></h3>
             <p id="modal-text" class="text-sm text-gray-600 mb-4"></p>
             <button id="modal-close" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                Zavřít
+                Close
             </button>
         </div>
     </div>

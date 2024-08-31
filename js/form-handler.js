@@ -22,33 +22,33 @@ document.addEventListener('DOMContentLoaded', function() {
         div.className = 'flex items-center space-x-2';
         div.innerHTML = `
             <div class="flex-grow">
-                <label for="cf-year-${year}" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Očekávaný peněžní tok pro tento rok v milionech. Peněžní tok je rozdíl mezi příjmy a výdaji společnosti. Tyto hodnoty můžete odhadnout na základě historických dat z výkazu peněžních toků (Cash Flow Statement) a očekávaného růstu společnosti.">
-                    Peněžní tok rok ${year} (Cash Flow Year ${year}) (v milionech&nbsp;<span class="currency-span">${currencySelect.value}</span>)
+                <label for="cf-year-${year}" class="block text-sm font-medium text-gray-700 flex items-center" data-modal-text="Expected cash flow for this year in millions. Cash flow is the difference between a company's income and expenses. You can estimate these values based on historical data from the Cash Flow Statement and expected company growth.">
+                    Cash Flow Year ${year} (in millions&nbsp;<span class="currency-span">${currencySelect.value}</span>)
                     <span class="ml-1 modal-trigger cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                         </svg>
                     </span>
                 </label>
-                <input type="number" id="cf-year-${year}" name="cf-year-${year}" placeholder="např. 100" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                <input type="number" id="cf-year-${year}" name="cf-year-${year}" placeholder="e.g. 100" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
             </div>
         `;
         cashFlowsInputs.appendChild(div);
-        updateCurrency(); // Přidáno: aktualizace měny po přidání nového vstupu
+        updateCurrency(); // Added: update currency after adding new input
 
-        // Přidejte event listener pro nově vytvořený modal trigger
+        // Add event listener for newly created modal trigger
         const newModalTrigger = div.querySelector('.modal-trigger');
         if (window.addModalTriggerListener) {
             window.addModalTriggerListener(newModalTrigger);
         } else {
-            console.error('Funkce addModalTriggerListener není dostupná');
+            console.error('Function addModalTriggerListener is not available');
         }
     }
 
     function updateCashFlowInputs() {
         const forecastYears = parseInt(forecastYearsInput.value);
         if (isNaN(forecastYears) || forecastYears < 1) {
-            alert('Prosím zadejte platný počet let prognózy.');
+            alert('Please enter a valid number of forecast years.');
             return;
         }
 
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 1; i <= forecastYears; i++) {
             addCashFlowInput(i);
         }
-        updateCurrency(); // Přidáno: aktualizace měny po přidání všech vstupů
+        updateCurrency(); // Added: update currency after adding all inputs
     }
 
     forecastYearsInput.addEventListener('change', updateCashFlowInputs);
@@ -83,14 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let i = 0; i < forecastYears; i++) {
                 const cf = parseFloat(cashFlowInputs[i].value) * 1000000;
                 if (isNaN(cf)) {
-                    throw new Error(`Prosím zadejte platnou hodnotu pro peněžní tok v roce ${i + 1}.`);
+                    throw new Error(`Please enter a valid value for cash flow in year ${i + 1}.`);
                 }
                 cashFlows.push(cf);
             }
 
             const intrinsicValue = calculateDCF(cashFlows, discountRate, terminalGrowthRate, sharesOutstanding);
 
-            // Vyčistíme předchozí výsledky
+            // Clear previous results
             intrinsicValueP.innerHTML = '';
             comparisonP.innerHTML = '';
             const existingExplanation = resultDiv.querySelector('.explanation');
@@ -98,47 +98,49 @@ document.addEventListener('DOMContentLoaded', function() {
                 existingExplanation.remove();
             }
 
-            intrinsicValueP.textContent = `Vnitřní hodnota akcie: `;
+            intrinsicValueP.textContent = `Intrinsic value of the stock: `;
             const valueSpan = document.createElement('span');
             valueSpan.textContent = `${intrinsicValue.toFixed(2)} ${selectedCurrency}`;
             valueSpan.className = 'result-value';
             intrinsicValueP.appendChild(valueSpan);
 
             const comparison = ((intrinsicValue / currentStockPrice - 1) * 100).toFixed(2);
-            comparisonP.textContent = `Akcie je ${comparison > 0 ? 'podhodnocená' : 'nadhodnocená'} o `;
+            comparisonP.textContent = `The stock is ${comparison > 0 ? 'undervalued' : 'overvalued'} by `;
             const comparisonSpan = document.createElement('span');
             comparisonSpan.textContent = `${Math.abs(comparison)}%`;
             comparisonSpan.className = 'result-comparison';
             comparisonP.appendChild(comparisonSpan);
 
-            // Přidáme vysvětlivky
+            // Add explanations
             const explanationP = document.createElement('p');
             explanationP.className = 'mt-4 text-sm text-gray-600 explanation';
             explanationP.innerHTML = `
-                <strong>Jak se to počítá?</strong><br>
-                1. Vypočítáme vnitřní hodnotu akcie pomocí modelu DCF (Discounted Cash Flow).<br>
-                2. Porovnáme vypočítanou vnitřní hodnotu (${intrinsicValue.toFixed(2)} ${selectedCurrency}) s aktuální tržní cenou (${currentStockPrice} ${selectedCurrency}).<br>
-                3. Rozdíl mezi těmito hodnotami určuje, zda je akcie podhodnocená nebo nadhodnocená.<br>
+                <strong>How is this calculated?</strong><br>
+                1. We calculate the intrinsic value of the stock using the DCF (Discounted Cash Flow) model.<br>
+                2. We compare the calculated intrinsic value (${intrinsicValue.toFixed(2)} ${selectedCurrency}) with the current market price (${currentStockPrice} ${selectedCurrency}).<br>
+                3. The difference between these values determines whether the stock is undervalued or overvalued.<br>
                 <br>
-                <strong>Co to znamená?</strong><br>
-                - Pokud je akcie <em>podhodnocená</em>, model naznačuje, že by mohla mít potenciál k růstu.<br>
-                - Pokud je akcie <em>nadhodnocená</em>, model naznačuje, že by mohla být v současnosti přeceněná.<br>
+                <strong>What does this mean?</strong><br>
+                - If the stock is <em>undervalued</em>, the model suggests it might have potential for growth.<br>
+                - If the stock is <em>overvalued</em>, the model suggests it might be currently overpriced.<br>
                 <br>
-                <strong>Upozornění:</strong> Toto hodnocení je založeno na zadaných vstupních datech a předpokladech modelu DCF. Vždy provádějte vlastní analýzu a nepoužívejte toto jako jediný zdroj pro investiční rozhodnutí.
+                <strong>Disclaimer:</strong> This assessment is based on the input data and assumptions of the DCF model. Always conduct your own analysis and do not use this as the sole source for investment decisions.
             `;
 
             resultDiv.appendChild(explanationP);
             resultDiv.classList.remove('hidden');
 
-            console.log('Vstupní hodnoty:', { forecastYears, discountRate, terminalGrowthRate, currentStockPrice, sharesOutstanding });
-            console.log('Peněžní toky:', cashFlows);
-            console.log('Vnitřní hodnota akcie:', intrinsicValue);
+            console.log('Input values:', { forecastYears, discountRate, terminalGrowthRate, currentStockPrice, sharesOutstanding });
+            console.log('Cash flows:', cashFlows);
+            console.log('Intrinsic value of the stock:', intrinsicValue);
         } catch (error) {
-            // Použijeme globální funkci openModal
-            window.openModal('Chyba', error.message);
+            // Use the global openModal function
+            window.openModal('Error', error.message);
         }
     });
 
-    // Inicializace měny při načtení stránky
+    // Initialize currency on page load
+    currencySelect.value = '$';
     updateCurrency();
+
 });

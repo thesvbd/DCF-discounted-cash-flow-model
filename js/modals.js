@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalText = document.getElementById('modal-text');
     const modalClose = document.getElementById('modal-close');
 
-    function openModal(title, text, closeButtonText = 'Zavřít') {
+    function openModal(title, text, closeButtonText = 'Close') {
         modalTitle.textContent = title;
         modalText.innerHTML = text;
         modalClose.textContent = closeButtonText;
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Přidejte event listenery pro existující modal triggers
+    // Add event listeners for existing modal triggers
     const modalTriggers = document.querySelectorAll('.modal-trigger');
     modalTriggers.forEach(addModalTriggerListener);
 
@@ -46,18 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Exportujte funkce, aby byly dostupné v jiných souborech
+    // Export functions to make them available in other files
     window.addModalTriggerListener = addModalTriggerListener;
     window.openModal = openModal;
     window.closeModal = closeModal;
 
-    // Zobrazení úvodního modálního okna
+    // Display initial modal window
     const disclaimerText = `
-        <p><strong>[CS]</strong></p>
-        <p>⚠️ Upozornění: Toto je experimentální projekt a může obsahovat chyby. Nečiňte žádná investiční rozhodnutí na základě tohoto nástroje.</p>
-        <br>
         <p><strong>[EN]</strong></p>
         <p>⚠️ Disclaimer: This is an experimental project and may contain errors. Do not make any investment decisions based on this tool.</p>
     `;
-    openModal('Upozornění / Disclaimer', disclaimerText, 'Beru na vědomí / Understood');
+    openModal('Warning and Disclaimer', disclaimerText, 'I understand');
 });
